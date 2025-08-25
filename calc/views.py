@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Customer, Product
 
 def home(request):
     return render(request, 'home.html')
@@ -11,7 +12,11 @@ def add(request):
         return render(request, 'result.html', {'result': val3})
     except ValueError:
         return render(request, 'result.html', {'result': 'Invalid input'})
-    
 
-def dashboard(request):
-    return render(request,'dashboard.html')
+def dashboard(request): 
+    customers = Customer.objects.all() 
+    return render(request, 'dashboard.html', {'customers': customers})
+
+def products(request): 
+    products = Product.objects.all() 
+    return render(request, 'product.html', {'products': products})
